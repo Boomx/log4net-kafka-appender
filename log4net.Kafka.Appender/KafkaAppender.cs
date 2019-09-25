@@ -45,6 +45,12 @@ namespace log4net.Kafka.Appender
                 if (KafkaSettings == null) throw new LogException("KafkaSettings is missing");
 
                 if (KafkaSettings.Brokers == null || KafkaSettings.Brokers.Count == 0) throw new Exception("Broker is not found");
+                if (KafkaSettings.Params != null && KafkaSettings.Brokers.Count != 0) 
+                    KafkaSettings.Params.ForEach(p => {
+                        var key = p.Split(new[] { '=' }, 2).First();
+                        var value = p.Split(new[] { '=' }, 2).LastOrDefault();
+                        conf.Add(key, value);
+                    });
 
                 if (producer == null)
                 {

@@ -18,5 +18,7 @@ namespace log4net.Kafka.Appender
         public PatternLayout Partition { get; set; }
         public bool HashPartitionEnabled { get; set; }
         public string NumberMaxPartition { get; set; }
+
+        public List<string> Params { get; set; }
     }
 }
